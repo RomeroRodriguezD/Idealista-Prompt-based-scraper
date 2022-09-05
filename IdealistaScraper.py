@@ -22,9 +22,9 @@ def scrapear():
     if inmueble == 0:
       inmueble = 'viviendas'
     elif inmueble == 1:
-      inmueble == 'habitaciones'
+      inmueble = 'habitacion'
     elif inmueble == 2:
-      inmueble == 'locales'
+      inmueble = 'locales'
       naves_flag = True
     elif inmueble == 3:
       inmueble = 'locales'
