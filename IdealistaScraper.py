@@ -1,3 +1,5 @@
+'''Idealista web scraper''' 
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
@@ -42,7 +44,7 @@ def scrapear():
       regimen = 'venta'
     else:
       regimen = 'alquiler'
-      # Quita los acentos. En IDE se puede usar el módulo unicodedata, en Google Colab no.
+      # Quita los acentos. En IDE se puede usar el módulo unicodedata, en Google Colab no.     
     for letra, reemplazo in replacement_chars.items():
       ciudad = ciudad.replace(letra, reemplazo)
       provincia = provincia.replace(letra, reemplazo)
@@ -184,28 +186,11 @@ def scrapear():
                 if len(item2) <=10: # If it has 3 numbers its a valid m2 value.
                     metros_finales.append(item2)
                 elif len(item2)==2:
-                   # if int(item2)>25:
+                   # if int(item2)>25:  
                     metros_finales.append(item2)
                 break
         pagina += 1
 
-    #Mean and mode for prices. Then, converted to dataframe.
-
-   # mediahecha = round(statistics.mean(precios), 2)
-    #modahecha = statistics.mode(precios)
-    # Append to lists
-    #media.append(mediahecha)
-    #moda.append(modahecha)
-
-    #metros_media = round(statistics.mean(metros_finales))
-    #media_m2.append(metros_media)
-    #media_m2frame = pd.DataFrame({'Media m2':media_2})
-    # Makes them a DataFrame
-    modaframe = pd.DataFrame({'Moda': moda})
-    mediaframe = pd.DataFrame({'Media': media})
-    # Resets index.
-    modaframe = modaframe.reset_index()
-    mediaframe = mediaframe.reset_index()
     # Turns m2 into a DataFrame
     metros_frame = pd.DataFrame({'m2':metros_finales})
     metros_frame.reset_index()
@@ -216,6 +201,7 @@ def scrapear():
     viviendas_finales = [viviendas, metros_frame]
     archivo_viviendas = pd.concat(viviendas_finales, axis=1)
     #del archivo_viviendas['index'] #Deletes index column
+    #print(archivo_viviendas)
     archivo_viviendas.to_excel(f'{str(ciudad)}{str(inmueble)}{str(regimen)}Totales.xls')
 
 if __name__ == '__main__':
