@@ -10,17 +10,17 @@ import re
 
 def scrapear():
 
-    # Lista para reemplazar acentos.
+    # List to replace accents
     replacement_chars = {'à':'a', 'á':'a', 'è':'e', 'é':'e', 'í':'i', 'ì':'i', 'ó':'o', 'ò':'o', 'ú':'u', 'ù':'u'}
-    # Semáforos
+    # Needed flags
     naves_flag = False
     locales_flag = False
-    # Parámetros de búsqueda
+    # Search parameters
     ciudad = str(input('¿De qué ciudad quieres scrapear?')).lower()
     ciudad = ciudad.replace(" ", "-")
     provincia = str(input('¿De qué provincia es? ')).lower()
     inmueble = int(input('¿Qué tipo de inmueble quieres buscar?\nIntroduce el número asociado.\n(0) Viviendas\n(1) Habitaciones\n(2) Naves\n(3) Locales\n(4) Trasteros\n(5) Garajes\n(6) Terrenos.\n'))
-    # Asigna el parámetro inmueble a la URL.
+    # Assign 'inmueble' parameter to the URL
     if inmueble == 0:
       inmueble = 'viviendas'
     elif inmueble == 1:
@@ -39,12 +39,12 @@ def scrapear():
       inmueble = 'terrenos'
 
     regimen = int(input('¿De alquiler (0) o venta (1)? Introduce el número correcto.'))
-    # Asigna el parámetro régimen a la URL.
+    # Assign 'regimen' parameter to the URL
     if regimen == 1:
       regimen = 'venta'
     else:
       regimen = 'alquiler'
-      # Quita los acentos. En IDE se puede usar el módulo unicodedata, en Google Colab no.     
+      # Cleans accents    
     for letra, reemplazo in replacement_chars.items():
       ciudad = ciudad.replace(letra, reemplazo)
       provincia = provincia.replace(letra, reemplazo)
@@ -72,11 +72,9 @@ def scrapear():
     media = []
     moda = []
     metros_finales = []
-    # media_m2 = [] De momento descartada
     siguiente = True
     pagina = 1
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
 
     while siguiente:
         time.sleep(random.randint(3,7))
@@ -101,7 +99,6 @@ def scrapear():
 
             siguiente=False
 
-        #print(seguir)
         print(f"Vuelta {pagina}") # Page check
 
         for i in precio:  # First converts the price into string, removes dots, then it converts it into a float.
@@ -135,7 +132,9 @@ def scrapear():
         calles = [s.replace(signo1, "") for s in calles]
         calles = [s.replace(signo2, "") for s in calles]
 
-        try:   #Makes corrections on description content, if there's no description, it just pass.
+         #Makes corrections on description content, if there's no description, it just pass.
+            
+        try:  
 
             for i in descripciones:
                 descripciones = [s.replace(signo1, "") for s in descripciones]
